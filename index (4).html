@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MindStack</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+
+<!-- ONBOARD -->
+<div id="p-onboard" class="page active">
+  <div class="ob-logo serif">MindStack</div>
+  <p class="ob-sub">Understand your cognitive patterns through the lens of MBTI functions.</p>
+  <div class="ob-lbl">Your MBTI type</div>
+  <div class="mode-row">
+    <button class="mode-btn active" id="m-know" onclick="setMode('know')">I know my type</button>
+    <button class="mode-btn" id="m-unsure" onclick="setMode('unsure')">Not sure / finding out</button>
+  </div>
+  <div id="sec-know">
+    <div class="type-grid" id="tg-know"></div>
+    <p class="hint">Tap to select</p>
+    <button class="btn-p" id="btn-start" disabled onclick="startApp()">Explore my type</button>
+    <button class="btn-g" onclick="setMode('unsure')">Not sure? Find your type</button>
+  </div>
+  <div id="sec-unsure" style="display:none">
+    <p style="font-size:14px;color:var(--text2);margin-bottom:18px;line-height:1.6">Select all the types that sound like you. We will narrow it down.</p>
+    <div class="type-grid" id="tg-multi"></div>
+    <p class="hint" id="multi-hint">Select one or more</p>
+    <button class="btn-p" id="btn-quiz" disabled onclick="startQuiz()">Find my type</button>
+    <button class="btn-g" onclick="setMode('know')">I know my type</button>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div id="p-quiz" class="page">
+  <div class="quiz-prog" id="quiz-prog"></div>
+  <div class="quiz-q serif" id="quiz-q"></div>
+  <p class="quiz-sub" id="quiz-sub"></p>
+  <div class="quiz-opts" id="quiz-opts"></div>
+  <button class="btn-g" onclick="showPage('p-onboard')">Back</button>
+</div>
+
+<!-- RESULT -->
+<div id="p-result" class="page">
+  <div style="text-align:center;padding:16px 0 24px">
+    <div style="font-size:11px;font-weight:500;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px">Your likely type</div>
+    <div class="result-type serif" id="res-type"></div>
+    <p style="font-size:14px;color:var(--text2);line-height:1.6;max-width:300px;margin:0 auto" id="res-desc"></p>
+  </div>
+  <div class="card" id="res-stack"></div>
+  <button class="btn-p" onclick="startApp()">This is me - explore my type</button>
+  <button class="btn-g" onclick="showPage('p-onboard')">Try again</button>
+</div>
+
+<!-- MAIN APP -->
+<div id="main-app" style="display:none">
+
+  <!-- LEARN TAB -->
+  <div id="tab-learn" class="page" style="display:none">
+    <div class="sec-title serif" id="learn-title"></div>
+    <p class="sec-sub">Understand your wiring and the system underneath all types.</p>
+    <div class="learn-tabs">
+      <button class="l-tab active" onclick="setLearnTab('stack')">Your stack</button>
+      <button class="l-tab" onclick="setLearnTab('glossary')">Functions</button>
+      <button class="l-tab" onclick="setLearnTab('growth')">Growth</button>
+    </div>
+    <div id="lv-stack"></div>
+    <div id="lv-glossary" style="display:none"></div>
+    <div id="lv-growth" style="display:none"></div>
+  </div>
+
+  <!-- EXPLORE TAB -->
+  <div id="tab-explore" class="page" style="display:none">
+    <div class="sec-title serif">Explore types</div>
+    <p class="sec-sub">See any type from any perspective.</p>
+
+    <!-- Viewing As dropdown -->
+    <div class="card" style="margin-bottom:12px">
+      <div class="c-lbl" style="margin-bottom:6px">Viewing as</div>
+      <p style="font-size:12px;color:var(--text3);margin-bottom:10px">Switch perspective to see how different types read each other.</p>
+      <div class="viewer-dropdown-wrap">
+        <select class="viewer-select" id="viewer-select" onchange="onViewerChange(this.value)"></select>
+        <div class="viewer-select-arrow">&#9660;</div>
+      </div>
+    </div>
+
+    <!-- Type to view -->
+    <div class="c-lbl" style="margin-bottom:8px;padding:0 2px">Viewing</div>
+    <div class="ex-grid" id="ex-type-grid"></div>
+    <div id="ex-detail"></div>
+  </div>
+
+  <!-- SIGN OUT TAB -->
+  <div id="tab-signout" class="page" style="display:none">
+    <div style="display:flex;flex-direction:column;align-items:center;padding:48px 0 32px">
+      <div class="ob-logo serif" style="margin-bottom:8px">MindStack</div>
+      <p style="font-size:14px;color:var(--text2);text-align:center;line-height:1.65;max-width:280px;margin-bottom:32px">Switch types, retake the quiz, or explore from a different perspective.</p>
+      <div style="background:var(--surface2);border-radius:var(--rs);padding:14px 20px;margin-bottom:28px;text-align:center;width:100%">
+        <div style="font-size:11px;font-weight:500;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px">Current type</div>
+        <div class="serif" id="so-type" style="font-size:40px;color:var(--purple)"></div>
+      </div>
+      <button class="btn-p" onclick="signOut()">Choose a new type</button>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<nav class="nav" id="main-nav" style="display:none">
+  <button class="nav-item active" id="nav-learn" onclick="switchTab('learn')"><div class="nav-dot"></div>Learn</button>
+  <button class="nav-item" id="nav-explore" onclick="switchTab('explore')"><div class="nav-dot"></div>Explore</button>
+  <button class="nav-item" id="nav-signout" onclick="switchTab('signout')"><div class="nav-dot"></div>Sign out</button>
+</nav>
+
+<script src="app.js"></script>
+</body>
+</html>
