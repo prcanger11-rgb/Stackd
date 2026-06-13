@@ -1,5 +1,4 @@
 var EXPLORE_PAIRS = {
- var EXPLORE_PAIRS = {
 'INTP-INTJ':{
     overview:'You deconstruct the universe into precise, internal logical frameworks (Ti-Ne). You look at the INTJ and see a fellow architect of abstract systems—someone who shares your deep distrust of social consensus, but who completely bypasses the joy of open-ended variables to brutally force a singular, closed conclusion (Ni-Te).',
     strengths:'They are the ultimate structural anchor. They provide the decisive commitment and real-world execution that actually gives your endless theoretical frameworks somewhere to land. In return, your expansive exploration (Ne) rigorously challenges their rigid models and prevents them from calcifying prematurely.',
