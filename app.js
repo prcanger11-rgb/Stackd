@@ -2663,6 +2663,8 @@ function loadExploreDetail(type) {
       '<div style="background:var(--red-l);border-radius:var(--rs);padding:14px">' +
       '<div class="fn-sec-lbl" style="margin-bottom:6px">Where friction happens</div>' +
       '<p style="font-size:13px;color:var(--red);line-height:1.7">' + (d.friction || '') + '</p></div></div>';
-
+    
+console.log(d);
+console.log(html);
   det.innerHTML = html;
 }
