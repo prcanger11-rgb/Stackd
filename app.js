@@ -2542,13 +2542,6 @@ function loadExploreDetail(type) {
   var det = document.getElementById('ex-detail');
   var viewer = exploreViewer || userType;
   var cacheKey = viewer + '-' + type;
-  var d = EXPLORE_PAIRS[cacheKey] || EXPLORE_PAIRS[type+'-'+viewer] || {};  var isSelf = type === viewer;
-  var viewerLabel = viewer === userType ? 'your type (' + viewer + ')' : viewer;
-
-function loadExploreDetail(type) {
-  var det = document.getElementById('ex-detail');
-  var viewer = exploreViewer || userType;
-  var cacheKey = viewer + '-' + type;
   var d = EXPLORE_PAIRS[cacheKey] || EXPLORE_PAIRS[type+'-'+viewer] || {};
   var isSelf = type === viewer;
   var viewerLabel = viewer === userType ? 'your type (' + viewer + ')' : viewer;
