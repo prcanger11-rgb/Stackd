@@ -2655,7 +2655,6 @@ function loadExploreDetail(type) {
     '<div style="background:var(--amber-l);border-radius:var(--rs);padding:12px"><div class="fn-sec-lbl" style="margin-bottom:5px">Blind spots</div><p style="font-size:13px;line-height:1.6">' + (d.shadow || '') + '</p></div>' +
     '</div></div>';
 
-  if (!isSelf) {
     html += '<div class="card"><div class="c-lbl">' + viewer + ' + ' + type + ' dynamic</div>' +
       '<p style="font-size:14px;line-height:1.75;margin-bottom:14px">' + (d.dynamic || '') + '</p>' +
       '<div style="background:var(--purple-l);border-radius:var(--rs);padding:14px;margin-bottom:10px">' +
@@ -2664,6 +2663,6 @@ function loadExploreDetail(type) {
       '<div style="background:var(--red-l);border-radius:var(--rs);padding:14px">' +
       '<div class="fn-sec-lbl" style="margin-bottom:6px">Where friction happens</div>' +
       '<p style="font-size:13px;color:var(--red);line-height:1.7">' + (d.friction || '') + '</p></div></div>';
-  }
+
   det.innerHTML = html;
 }
